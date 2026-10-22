@@ -6,6 +6,11 @@ public class SistemaBancario {
     public static final String AMARELO  = "\u001B[33m"; // Para avisos e menu
     public static final String CIANO    = "\u001B[36m"; // Para consultas de saldo
     public static final String NEGRITO  = "\u001B[1m";  // Para texto em destaque
-    // Os métodos (depositar, sacar, consultarSaldo) vão entrar aqui, um por um nas branches!
+
+    public static void consultarSaldo(double saldo) {
+        System.out.println(CIANO + "\n---------------------------------" + RESET);
+        System.out.printf(CIANO + NEGRITO + "  Saldo Atual: R$ %.2f\n" + RESET, saldo);
+        System.out.println(CIANO + "---------------------------------" + RESET);
+    }
 
 }

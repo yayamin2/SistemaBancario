@@ -29,7 +29,7 @@ public class Main {
                     System.out.println(SistemaBancario.AMARELO + "Opção: Sacar (a implementar)" + SistemaBancario.RESET);
                     break;
                 case 3:
-                    System.out.println(SistemaBancario.AMARELO + "Opção: Consultar Saldo (a implementar)" + SistemaBancario.RESET);
+                    SistemaBancario.consultarSaldo(saldo);
                     break;
                 case 4:
                     System.out.println(SistemaBancario.VERDE + "Obrigado por usar o sistema. Até logo!" + SistemaBancario.RESET);
