@@ -6,14 +6,9 @@ public class SistemaBancario {
 
         System.out.println("===SISTEMA BANCÁRIO===");
 
-        int idade;
-        String nome;
 
-        System.out.println("Digite seu nome: ");
-        nome = sc.nextLine();
 
-        System.out.println("Digite sua idade : ");
-        idade = sc.nextInt();
+
 
 
     }
