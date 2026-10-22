@@ -30,7 +30,11 @@ public class Main {
                     saldo = SistemaBancario.depositar(saldo, valorDeposito);
                     break;
                 case 2:
-                    System.out.println(SistemaBancario.AMARELO + "Opção: Sacar (a implementar)" + SistemaBancario.RESET);
+                    // Solicita o valor do saque ao usuário
+                    System.out.print(SistemaBancario.AMARELO + "Digite o valor para sacar: " + SistemaBancario.RESET);
+                    double valorSaque = sc.nextDouble();
+                    // Chama o método sacar e atualiza o saldo
+                    saldo = SistemaBancario.sacar(saldo, valorSaque);
                     break;
                 case 3:
                     SistemaBancario.consultarSaldo(saldo);
