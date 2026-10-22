@@ -23,7 +23,11 @@ public class Main {
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
-                    System.out.println(SistemaBancario.AMARELO + "Opção: Depositar (a implementar)" + SistemaBancario.RESET);
+                    // Solicita o valor do depósito ao usuário
+                    System.out.print(SistemaBancario.AMARELO + "Digite o valor para depositar: " + SistemaBancario.RESET);
+                    double valorDeposito = sc.nextDouble();
+                    // Chama o método depositar e atualiza o saldo
+                    saldo = SistemaBancario.depositar(saldo, valorDeposito);
                     break;
                 case 2:
                     System.out.println(SistemaBancario.AMARELO + "Opção: Sacar (a implementar)" + SistemaBancario.RESET);
