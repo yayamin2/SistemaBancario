@@ -1,22 +1,22 @@
-﻿# 🏦 Sistema Bancário em Java
+# 🏦 Sistema Bancário em Java (Fourbank)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-Aplicação de terminal desenvolvida em **Java** para simular as principais operações do dia a dia de um aplicativo bancário, incluindo autenticação com senha, movimentações financeiras e acompanhamento de extrato.
+Aplicação de terminal desenvolvida em **Java** para simular as principais operações do dia a dia de um aplicativo bancário (Fourbank), incluindo gerenciamento de contas, autenticação por senha, movimentações financeiras seguras e histórico detalhado de transações via `LinkedList`.
 
 ---
 
 ## 🎯 Funcionalidades
 
-- 🔒 **Autenticação Segura (Login):** Acesso à conta protegido por senha, simulando a segurança de entrada de um app de banco.
-- 💰 **Consulta de Saldo:** Exibição rápida e clara do saldo disponível em conta corrente.
-- 💵 **Depósitos:** Entrada de valores com validação para impedir depósitos negativos ou zerados.
+- 🔒 **Autenticação Segura (Login):** Acesso à conta protegido por senha, simulando a segurança de entrada de um aplicativo de banco.
+- 💰 **Consulta de Saldo:** Exibição clara e atualizada do saldo disponível em conta corrente.
+- 💵 **Depósitos:** Entrada de valores com validação estrita para impedir depósitos negativos ou zerados.
 - 💸 **Saques:** Retirada de valores com verificação de saldo disponível em conta para evitar saldo negativo.
-- 📲 **Transferências Bancárias:** Envio de valores para outra conta/chave (estilo Pix ou transferência entre contas) com validação de saldo.
-- 📜 **Extrato Bancário:** Histórico das últimas movimentações realizadas (entradas e saídas com descrição).
-- 🎨 **Terminal Colorido (Códigos ANSI):** Feedback visual para o usuário com mensagens em verde (sucesso), vermelho (erros/alertas) e ciano (consultas).
-- 🧭 **Menu Interativo:** Navegação fluida no console através de laço de repetição e `switch/case`.
+- 📲 **Transferências Bancárias:** Envio de valores entre contas com validação de saldo e integridade de destino.
+- 📜 **Extrato Bancário:** Histórico das últimas movimentações realizadas (entradas e saídas com registros temporais).
+- 🎨 **Terminal Colorido (Códigos ANSI):** Feedback visual para o usuário com mensagens estilizadas (sucesso, erros/alertas e consultas).
+- 🧭 **Menu Interativo:** Navegação fluida no console através de laço de repetição (`do-while`) e `switch/case`.
 
 ---
 
@@ -24,37 +24,38 @@ Aplicação de terminal desenvolvida em **Java** para simular as principais oper
 
 | Opção | Operação | O que faz |
 |:-----:|----------|-----------|
-| `1` | **Consultar Saldo** | Mostra o saldo atual disponível |
-| `2` | **Depositar** | Adiciona fundos à conta bancária |
-| `3` | **Sacar** | Realiza o saque caso haja saldo suficiente |
-| `4` | **Transferência** | Transfere um valor para outra conta bancária |
-| `5` | **Extrato** | Lista o histórico das transações realizadas |
-| `0` | **Sair** | Encerra a sessão com segurança |
+| `1` | **Transferir** | Envia valores para outra conta bancária |
+| `2` | **Depositar** | Adiciona fundos à conta em atendimento |
+| `3` | **Listar Transferências** | Exibe o histórico de envios realizados |
+| `4` | **Listar Depósitos** | Exibe o histórico de depósitos recebidos |
+| `5` | **Consultar Saldo** | Mostra o saldo atual disponível |
+| `6` | **Trocar Conta** | Alterna o atendimento entre diferentes contas (ex: Ana / Bruno) |
+| `0` | **Finalizar** | Encerra a sessão com segurança e mensagem de despedida |
 
 ---
 
 ## 💼 Regras de Negócio
 
 <details>
-<summary><b>1. Autenticação e Acesso</b></summary>
+<summary><b>1. Autenticação e Troca de Contas</b></summary>
 
-- O acesso ao menu principal só é liberado após a validação correta da senha do titular.
-- Em caso de senha incorreta, o sistema emite uma mensagem de erro e solicita nova tentativa.
+- O acesso aos serviços exige validação correta da senha do titular.
+- A troca de contas preserva os estados, históricos e contadores em memória durante toda a execução.
 </details>
 
 <details>
 <summary><b>2. Depósitos e Saques</b></summary>
 
 - **Depósito:** O valor informado deve ser estritamente positivo (`valor > 0`).
-- **Saque:** O valor deve ser maior que zero e não pode ultrapassar o saldo disponível (`valor <= saldo`).
-- Cada operação bem-sucedida gera automaticamente um registro no extrato bancário.
+- **Saque / Transferência:** O valor deve ser maior que zero e não pode ultrapassar o saldo disponível (`valor <= saldo`).
+- Operações recusadas não consomem identificadores (IDs) de controle nem alteram saldos ou históricos.
 </details>
 
 <details>
-<summary><b>3. Transferências e Extrato</b></summary>
+<summary><b>3. Histórico e Listagens (`LinkedList`)</b></summary>
 
-- **Transferência:** Exige saldo disponível suficiente e valida o valor antes de efetuar o débito.
-- **Extrato:** Armazena e exibe cada movimentação com seu tipo (Depósito, Saque ou Transferência) e o respectivo valor.
+- Cada operação concluída gera um registro contendo ID sequencial (gerenciado via `static`), dados da transação e carimbo de data/hora (`OffsetDateTime`).
+- As listagens mantêm a ordem cronológica dos eventos, do mais antigo para o mais recente.
 </details>
 
 ---
@@ -62,10 +63,11 @@ Aplicação de terminal desenvolvida em **Java** para simular as principais oper
 ## 🛠️ Tecnologias Utilizadas
 
 - **Linguagem:** Java 17+
-- **Gerenciador de Dependências:** Maven
+- **Estruturas de Dados:** `java.util.LinkedList` para controle de históricos
+- **Manipulação de Tempo:** `java.time.OffsetDateTime` para registro temporal com fuso
 - **Entrada e Saída:** `java.util.Scanner` e `System.out.printf` formatado
 - **Controle de Fluxo:** `do-while`, `switch/case` e `if/else`
-- **Interface:** ANSI Escape Codes para estilização e cores no terminal
+- **Interface:** Códigos de escape ANSI para estilização e cores no terminal
 
 ---
 
@@ -80,8 +82,8 @@ Clone o repositório e execute a partir da raiz do projeto:
 
 ```bash
 # Compilar os arquivos Java
-javac -d bin src/main/java/*.java
+javac -d bin src/*.java
 
 # Executar a aplicação
 java -cp bin Main
-```
+
