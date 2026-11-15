@@ -86,6 +86,9 @@ javac -d bin src/*.java
 
 # Executar a aplicação
 java -cp bin Main
+```
+
+---
 
 ## 👩‍💻 Autora
 
