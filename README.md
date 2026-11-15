@@ -87,3 +87,11 @@ javac -d bin src/*.java
 # Executar a aplicação
 java -cp bin Main
 
+## 👩‍💻 Autora
+
+**Yasmin**
+
+Graduanda em Engenharia de Software | Trainee Fourcamp (Foursys) | Foco em Back-end, Java e FinTechs
+
+[![GitHub](https://img.shields.io/badge/GitHub-yayamin2-181717?style=flat-square&logo=github)](https://github.com/yayamin2)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-yasminmorenomendes-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yasminmorenomendes)
