@@ -3,10 +3,11 @@ import java.util.Scanner;
 public class Main {
     static void main(String[] args) {
 
-        Conta Maria_Luiza = new Conta("Maria Luiza", 1001, 2000); // Cria uma nova conta com titular "Ana" e número 1001
-        Conta Pietro = new Conta("Pietro", 1002, 2000); // Cria uma nova conta com titular "Bruno" e número 1002
+        Conta mariaLuiza = new Conta("Maria Luiza", 1001, 2000); // Cria uma nova conta com titular "Ana" e número 1001
+        Conta pietro = new Conta("pietro", 1002, 500); // Cria uma nova conta com titular "Bruno" e número 1002
+        Conta Marie = new Conta("Marie", 1003, 15000); // Cria uma nova conta com titular "Marie" e número 1003
 
-        Conta contaAtual = Maria_Luiza; // Define a conta atual como a conta de Ana
+        Conta contaAtual = mariaLuiza; // Define a conta atual como a conta de Ana
 
         Scanner sc = new Scanner(System.in);
 
@@ -14,8 +15,9 @@ public class Main {
 
         System.out.println(Cores.ROSA + "Bem-vindo ao Aura Finance!" + Cores.RESET);
         Banco banco = new Banco();
-        banco.adicionarConta(Maria_Luiza);
-        banco.adicionarConta(Pietro);
+        banco.adicionarConta(mariaLuiza);
+        banco.adicionarConta(pietro);
+        banco.adicionarConta(Marie);
 
         while (opcao != 0) {
 
@@ -32,17 +34,11 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o número da conta de destino (1001 para Maria Luiza, 1002 para Pietro):");
+                    System.out.println("Digite o número da conta de destino :");
                     int numeroDestino = sc.nextInt();
                     System.out.println("Digite o valor da transferência:");
                     double valorTransferencia = sc.nextDouble();
-                    Conta contaDestino = null; // Inicializa a variável contaDestino como nula
-                    if (numeroDestino == Maria_Luiza.getNumero()) {
-                        contaDestino = Maria_Luiza;
-                    } else if (numeroDestino == Pietro.getNumero()) {
-                        contaDestino = Pietro;
-                    }
-                    contaAtual.transferir(contaDestino, valorTransferencia);
+                    Conta contaDestino = banco.buscarConta(numeroDestino);
                     break;
                 case 2:
                     System.out.println("Digite o valor do depósito:");
@@ -59,19 +55,20 @@ public class Main {
                     contaAtual.consultarSaldo(); // Chama o método consultarSaldo da conta atual para exibir o saldo
                     break;
                 case 6:
+                    banco.listarContas();
                     System.out.println("Trocar conta");
-                    System.out.println("Digite o número da conta que deseja acessar (1001 para Maria Luiza, 1002 para Pietro):");
+                    System.out.println("Digite o número da conta que deseja acessar:");
                     int numeroEscolhido = sc.nextInt();
-                    if (numeroEscolhido == Maria_Luiza.getNumero()) {
-                        contaAtual = Maria_Luiza;
-                    } else if (numeroEscolhido == Pietro.getNumero()) {
-                        contaAtual = Pietro;
+                    Conta encontrada = banco.buscarConta(numeroEscolhido);
+                    if (encontrada != null) {
+                        contaAtual = encontrada; // Atualiza a conta atual para a conta encontrada
+                        System.out.println(Cores.VERDE + "Conta trocada com sucesso! Agora você está acessando a conta de " + contaAtual.getTitular() + Cores.RESET);
                     } else {
-                        System.out.println("Número de conta inválido");
+                        System.out.println(Cores.VERMELHO + "Conta não encontrada. Por favor, tente novamente." + Cores.RESET);
                     }
                     break;
                 case 0:
-                    System.out.println("Atendimento encerrado. Até logo!");
+                    System.out.println(Cores.ROSA + " Obrigado por utilizar o Aura Finance!" + Cores.RESET);
                     break;
                 default:
                     System.out.println("Opção inválida");
